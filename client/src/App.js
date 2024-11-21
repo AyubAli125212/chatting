@@ -65,7 +65,7 @@ const App = () => {
     <div className="container">
       <h1>Private Chat App</h1>
       {!isLoggedIn ? (
-        <div className="input-group">
+        <div className="input-group con">
           <input
             type="text"
             placeholder="Username"
