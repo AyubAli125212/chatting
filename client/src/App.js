@@ -62,60 +62,50 @@ const App = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <div className="container">
       <h1>Private Chat App</h1>
       {!isLoggedIn ? (
-        <div style={styles.loginForm}>
+        <div className="input-group">
           <input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            style={styles.input}
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
           />
-          <button onClick={handleLogin} style={styles.button}>
-            Login
-          </button>
+          <button onClick={handleLogin}>Login</button>
         </div>
       ) : (
         <div>
           <h2>Welcome, {username}!</h2>
-          <div style={styles.inputGroup}>
+          <div className="input-group">
             <input
               type="text"
               placeholder="Recipient's username"
               value={recipient}
               onChange={(e) => setRecipient(e.target.value)}
-              style={styles.input}
             />
-            <button onClick={fetchChatHistory} style={styles.button}>
-              Load Chat
-            </button>
+            <button onClick={fetchChatHistory}>Load Chat</button>
           </div>
-          <div style={styles.inputGroup}>
+          <div className="input-group">
             <input
               type="text"
               placeholder="Type a message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              style={styles.input}
             />
-            <button onClick={handleSendMessage} style={styles.button}>
-              Send
-            </button>
+            <button onClick={handleSendMessage}>Send</button>
           </div>
-          <div style={styles.chatBox}>
+          <div className="chat-box">
             {chatHistory.map((chat, index) => (
               <div
                 key={index}
-                style={chat.sender === username ? styles.messageFromMe : styles.messageFromThem}
+                className={chat.sender === username ? "from-me" : "from-them"}
               >
                 <strong>{chat.sender === username ? "You" : chat.sender}:</strong> {chat.content}
               </div>
@@ -123,19 +113,9 @@ const App = () => {
           </div>
         </div>
       )}
+      <footer>© 2024 ChatApp. All rights reserved.</footer>
     </div>
   );
-};
-
-const styles = {
-  container: { maxWidth: "500px", margin: "0 auto", textAlign: "center", padding: "20px" },
-  loginForm: { display: "flex", flexDirection: "column", alignItems: "center" },
-  input: { margin: "10px 10px", padding: "10px", width: "80%", borderRadius: "5px", border: "1px solid #ccc" },
-  button: { padding: "10px 20px", borderRadius: "5px", border: "none", backgroundColor: "#007bff", color: "white" },
-  inputGroup: { margin: "10px 0", display: "flex", justifyContent: "space-between", alignItems: "center" },
-  chatBox: { marginTop: "20px", padding: "10px", border: "1px solid #ccc", borderRadius: "5px", height: "300px", overflowY: "scroll" },
-  messageFromMe: { textAlign: "right", color: "#007bff", margin: "5px 0" },
-  messageFromThem: { textAlign: "left", color: "#333", margin: "5px 0" },
 };
 
 export default App;
